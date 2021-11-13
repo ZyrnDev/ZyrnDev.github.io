@@ -1,0 +1,53 @@
+name: Deploy to Production
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: jamduo/jamduo.github.io/.github/workflows/build_test_export.yml@main
+    with:
+      deployment-target: "Production"
+      node-version: "16.x"
+      node-environment: "production"
+      artifact-name: "static-export-production"
+      artifact-path: "./out"
+      site-url: "https://jamduo.org"
+    
+  deploy:
+    needs: [ build ]
+
+    uses: jamduo/jamduo.github.io/.github/workflows/deploy.yml@main
+    with:
+      deployment-target: "Production"
+      artifact-name: "static-export-production"
+      artifact-path: "./out"
+    secrets:
+      host: "${{ secrets.HOST }}"
+      port: "${{ secrets.PORT }}"
+      username: "${{ secrets.USERNAME }}"
+      rsa-key: "${{ secrets.SSH_RSA_KEY }}"
+      target-path: "${{ secrets.PROJECT_PATH }}"
+  
+  deploy-github-pages:
+    name: Deploy to Github Pages
+    needs: build
+    # environment: Github.io
+    concurrency: github_pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: download_artifacts
+        name: Download the static export
+        uses: actions/download-artifact@v2
+        with:
+          name: "static-export-production"
+          path: "./out"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: "./out"

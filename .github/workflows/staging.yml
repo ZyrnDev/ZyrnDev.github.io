@@ -1,0 +1,32 @@
+name: Deploy to Staging
+on:
+  push:
+    branches:
+      - development
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: jamduo/jamduo.github.io/.github/workflows/build_test_export.yml@development
+    with:
+      deployment-target: "Staging"
+      node-version: "16.x"
+      node-environment: "production"
+      artifact-name: "static-export-staging"
+      artifact-path: "./out"
+      site-url: "https://staging.jamduo.org"
+    
+  deploy:
+    needs: [ build ]
+
+    uses: jamduo/jamduo.github.io/.github/workflows/deploy.yml@development
+    with:
+      deployment-target: "Staging"
+      artifact-name: "static-export-staging"
+      artifact-path: "./out"
+    secrets:
+      host: "${{ secrets.HOST }}"
+      port: "${{ secrets.PORT }}"
+      username: "${{ secrets.USERNAME }}"
+      rsa-key: "${{ secrets.SSH_RSA_KEY }}"
+      target-path: "${{ secrets.STAGING_PROJECT_PATH }}"
