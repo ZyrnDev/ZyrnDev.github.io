@@ -15,6 +15,7 @@ jobs:
       artifact-name: "static-export-production"
       artifact-path: "./out"
       site-url: "https://jamduo.github.io/nextjs-template"
+      base-path: "/nextjs-template"
     
   # deploy:
   #   needs: [ build ]
