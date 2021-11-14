@@ -1,9 +1,12 @@
 # *
 User-agent: *
-Allow: /nextjs-template/
+Allow: /
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /blogs/unreleased/
 
 # Host
-Host: https://jamduo.github.io/nextjs-template
+Host: https://zyrndev.github.io
 
 # Sitemaps
-Sitemap: https://jamduo.github.io/nextjs-template/sitemap.xml
+Sitemap: https://zyrndev.github.io/sitemap.xml
