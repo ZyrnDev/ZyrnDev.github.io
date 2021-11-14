@@ -1,4 +1,4 @@
-const excludedPaths = [];
+const excludedPaths = [ /\/api/, /\/uploads/, /\/blogs\/unreleased/ ];
 
 const basePath = process.env.BASE_PATH || "";
 
@@ -10,7 +10,11 @@ module.exports = {
             {
                 userAgent: '*',
                 allow: [ `${basePath}/` ],
-                disallow: [ ],
+                disallow: [
+                    `${basePath}/api/`,
+                    `${basePath}/uploads/`,
+                    `${basePath}/blogs/unreleased/`,
+                ],
             },
         ]
     },

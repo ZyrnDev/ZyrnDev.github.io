@@ -5,7 +5,7 @@ import { Link, ThemeToggleButton } from '@components/core';
 
 type LinkType = { href: string; label: string }
 const LINKS: LinkType[] = [
-  { href: '/about-us', label: 'About' },
+  { href: '/about', label: 'About' },
   { href: '/blog', label: 'Blog' },
   // { href: '/test', label: 'Test' },
 ];
@@ -26,7 +26,7 @@ const Logo: FC = () => {
   return (
     <Heading as="span" m="auto" p="0 0.5em" size='md' >
       <Link href='/' _hover={{ textDecoration: "none" }} _active={{ textDecoration: "none" }} _focus={{ textDecoration: "none" }}>
-        example_logo
+        zyrn
       </Link>
     </Heading>
   );
