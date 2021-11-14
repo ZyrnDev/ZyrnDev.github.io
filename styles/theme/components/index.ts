@@ -11,17 +11,17 @@ const components = {
     },
     ButtonGroup: {
         defaultProps: {
-            colorScheme: "twitter"
+            colorScheme: "whatsapp"
         },
     },
     Button: {
         defaultProps: {
-            colorScheme: "twitter"
+            colorScheme: "whatsapp"
         },
     },
     IconButton: {
         defaultProps: {
-            colorScheme: "twitter"
+            colorScheme: "whatsapp"
         },
     },
 };
