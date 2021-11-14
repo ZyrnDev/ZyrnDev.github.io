@@ -25,7 +25,7 @@ export const Header: FC<BoxProps> = ({ ...props }) => (
 
 export const Footer: FC<CenterProps> = ({ ...props }) => (
   <Center as="footer" w="100%" {...props}>
-    made with <Text as="span" color="dark.red" p="0 0.2rem">❤</Text> by jamduo
+    made with <Text as="span" color="dark.red" p="0 0.2rem">❤</Text> by example_site
   </Center>
 );
 

@@ -28,8 +28,8 @@ const Meta: FC<MetaOptions> = ({title = "New Page", description, image, site_nam
       {/* <meta name="twitter:card" content="summary_large_image">
       <meta property="twitter:domain" content="test.zyrn.dev">
       <meta property="twitter:url" content="https://test.zyrn.dev:31500/blog/welcome/">
-      <meta name="twitter:title" content="Welcome">
-      <meta name="twitter:description" content="An exciting 😄 new update from the jamduo team. Our official launch 🚀 is finally here!">
+      <meta name="twitter:title" content={title}>
+      <meta name="twitter:description" content={description}>
       <meta name="twitter:image" content=""> */}      
 
       <meta name="robots" content={robots ?? "index, follow"} />

@@ -10,7 +10,7 @@ import { PostTitle } from '@/pages/blog/[filename]';
 
 const meta: MetaOptions = {
   title: "Blog",
-  description: "The official blog from jamduo on our projects, products and services.",
+  description: "The official blog from example_site on our projects, products and services.",
 };
 
 export const getStaticProps: GetStaticProps = async () => {

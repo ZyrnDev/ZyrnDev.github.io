@@ -7,14 +7,14 @@ import { Link } from '@components/core';
 
 const meta: MetaOptions = {
   title: "Home",
-  description: "jamduo.org's offical website for all our projects, products and services.",
+  description: "example_site's offical website for all our projects, products and services.",
 };
 
 export default function Home() {
   return (
     <Layout meta={meta}>
       <Heading as="h1" size="4xl" m="0.83rem 0">
-        Welcome to <Link href="https://www.jamduo.org" isText>jamduo!</Link>
+        Welcome to <Link href="https://www.example.com" isText>example_site!</Link>
       </Heading>
       <Description as="h2" size="lg">
         making loveable software together

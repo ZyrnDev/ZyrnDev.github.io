@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 const meta: MetaOptions = {
   title: "404 Not Found",
-  description: "jamduo.org's offical website for all our projects, products and services.",
+  description: "example_site's offical website for all our projects, products and services.",
 };
 
 export default function _404() {

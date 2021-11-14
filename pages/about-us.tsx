@@ -52,7 +52,7 @@ const profiles: ProfileOptions[] = [
 
 const meta: MetaOptions = {
   title: "About Us",
-  description: "About Us: jamduo! Find out about who we are, our members and our mission.",
+  description: "About Us: example_site! Find out about who we are, our members and our mission.",
 };
 
   export default function AboutUs() {
@@ -62,7 +62,7 @@ const meta: MetaOptions = {
         Who are we?
       </Heading>
       <Description as="h2" size="md">
-        jamduo: we jam &amp; theres 2 of us.
+        example_site: example_description.
         {/* Justin And Mitch (JAM), a DUO of software developers, working on various passion projects. */}
       </Description>
       
