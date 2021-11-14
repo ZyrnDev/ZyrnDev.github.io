@@ -1,6 +1,6 @@
 # *
 User-agent: *
-Allow: /
+Allow: /nextjs-template/
 
 # Host
 Host: https://jamduo.github.io/nextjs-template
