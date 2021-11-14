@@ -28,6 +28,19 @@ export const light = {
     yellow: "#f1fa8c",
 };
 
-const palettes = { light, dark };
+export const custom = {
+    "50": "hsl(240deg 11% 95%)",
+    "100": "hsl(240deg 11% 90%)",
+    "200": "hsl(240deg 11% 80%)",
+    "300": "hsl(240deg 11% 70%)",
+    "400": "hsl(240deg 11% 60%)",
+    "500": "hsl(240deg 11% 50%)",
+    "600": "hsl(240deg 11% 40%)",
+    "700": "hsl(240deg 11% 30%)",
+    "800": "hsl(240deg 11% 20%)",
+    "900": "hsl(240deg 11% 10%)",
+};
+
+const palettes = { light, dark, custom };
 
 export default palettes;

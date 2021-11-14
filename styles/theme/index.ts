@@ -7,6 +7,7 @@ import palette from "./palette";
 const colors = {
   light: palette.light,
   dark: palette.dark,
+  custom: palette.custom,
 };
 
 const styles = {

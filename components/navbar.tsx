@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { FC } from 'react';
-import { ButtonGroup, IconButton, Spacer, Menu, MenuList, MenuItem, MenuButton, Box, Button, Heading, ButtonGroupProps } from '@chakra-ui/react';
+import { ButtonGroup, IconButton, Spacer, Menu, MenuList, MenuItem, MenuButton, Box, Button, ButtonGroupProps, Image } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Link, ThemeToggleButton } from '@components/core';
+import { basePath } from '@/lib/env';
 
 type LinkType = { href: string; label: string }
 const LINKS: LinkType[] = [
@@ -24,11 +26,11 @@ const Navbar: FC<ButtonGroupProps> = ({ m, ...props }) => {
 
 const Logo: FC = () => {
   return (
-    <Heading as="span" m="auto" p="0 0.5em" size='md' >
-      <Link href='/' _hover={{ textDecoration: "none" }} _active={{ textDecoration: "none" }} _focus={{ textDecoration: "none" }}>
-        zyrn
+    <Box as="span" m="auto" p="0 0.5em">
+      <Link href='/' _hover={{ textDecoration: "none" }} _active={{ textDecoration: "none" }} _focus={{ textDecoration: "none" }} display="block">
+        <Image src={`${basePath}/favicon.ico`} alt="Home Page Icon" boxSize="40px" display="block"/>
       </Link>
-    </Heading>
+    </Box>
   );
 };
 

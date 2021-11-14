@@ -14,20 +14,19 @@ jobs:
       node-environment: "production"
       artifact-name: "static-export-staging"
       artifact-path: "./out"
-      site-url: "https://jamduo.github.io/nextjs-template"
-      base-path: "/nextjs-template"
+      site-url: "https://staging.zyrn.dev"
     
-  # deploy:
-  #   needs: [ build ]
+  deploy:
+    needs: [ build ]
 
-  #   uses: jamduo/nextjs-template/.github/workflows/deploy.yml@main
-  #   with:
-  #     deployment-target: "Staging"
-  #     artifact-name: "static-export-staging"
-  #     artifact-path: "./out"
-  #   secrets:
-  #     host: "${{ secrets.HOST }}"
-  #     port: "${{ secrets.PORT }}"
-  #     username: "${{ secrets.USERNAME }}"
-  #     rsa-key: "${{ secrets.SSH_RSA_KEY }}"
-  #     target-path: "${{ secrets.STAGING_PROJECT_PATH }}"
+    uses: jamduo/nextjs-template/.github/workflows/deploy.yml@main
+    with:
+      deployment-target: "Staging"
+      artifact-name: "static-export-staging"
+      artifact-path: "./out"
+    secrets:
+      host: "${{ secrets.HOST }}"
+      port: "${{ secrets.PORT }}"
+      username: "${{ secrets.USERNAME }}"
+      rsa-key: "${{ secrets.SSH_RSA_KEY }}"
+      target-path: "${{ secrets.STAGING_PROJECT_PATH }}"

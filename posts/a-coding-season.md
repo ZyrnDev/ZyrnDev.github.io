@@ -3,7 +3,6 @@ title: 'A Coding Season'
 date: '2020-12-19'
 author: 'Zyrn'
 published: true
-preview: "A look at rust, adventofcode.com and prism.js."
 ---
 
 This month has been mostly comprised of holiday preparation and lots of time doing my daily challenge on <a href=https://adventofcode.com/2020>Advent of Code 2020</a>. This advent challenge gives you a sequence of challenges each harder than the last to do from December 1st until Christmas Day, providing a coherent story to drive the progression.
