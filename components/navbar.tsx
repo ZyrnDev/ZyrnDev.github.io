@@ -26,7 +26,7 @@ const Navbar: FC<ButtonGroupProps> = ({ m, ...props }) => {
 
 const Logo: FC = () => {
   return (
-    <Box as="span" m="auto" p="0 0.5em" size='md' >
+    <Box as="span" m="auto" p="0 0.5em">
       <Link href='/' _hover={{ textDecoration: "none" }} _active={{ textDecoration: "none" }} _focus={{ textDecoration: "none" }} display="block">
         <Image src={`${basePath}/favicon.ico`} alt="Home Page Icon" boxSize="40px" display="block"/>
       </Link>
