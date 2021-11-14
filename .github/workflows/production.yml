@@ -7,29 +7,29 @@ on:
 
 jobs:
   build:
-    uses: jamduo/jamduo.github.io/.github/workflows/build_test_export.yml@main
+    uses: jamduo/nextjs-template/.github/workflows/build_test_export.yml@main
     with:
       deployment-target: "Production"
       node-version: "16.x"
       node-environment: "production"
       artifact-name: "static-export-production"
       artifact-path: "./out"
-      site-url: "https://jamduo.org"
+      site-url: "https://jamduo.github.io/nextjs-template"
     
-  deploy:
-    needs: [ build ]
+  # deploy:
+  #   needs: [ build ]
 
-    uses: jamduo/jamduo.github.io/.github/workflows/deploy.yml@main
-    with:
-      deployment-target: "Production"
-      artifact-name: "static-export-production"
-      artifact-path: "./out"
-    secrets:
-      host: "${{ secrets.HOST }}"
-      port: "${{ secrets.PORT }}"
-      username: "${{ secrets.USERNAME }}"
-      rsa-key: "${{ secrets.SSH_RSA_KEY }}"
-      target-path: "${{ secrets.PROJECT_PATH }}"
+  #   uses: jamduo/nextjs-template/.github/workflows/deploy.yml@main
+  #   with:
+  #     deployment-target: "Production"
+  #     artifact-name: "static-export-production"
+  #     artifact-path: "./out"
+  #   secrets:
+  #     host: "${{ secrets.HOST }}"
+  #     port: "${{ secrets.PORT }}"
+  #     username: "${{ secrets.USERNAME }}"
+  #     rsa-key: "${{ secrets.SSH_RSA_KEY }}"
+  #     target-path: "${{ secrets.PROJECT_PATH }}"
   
   deploy-github-pages:
     name: Deploy to Github Pages
@@ -49,5 +49,5 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "./out"

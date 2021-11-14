@@ -10,10 +10,10 @@ export interface MetaOptions {
 }
 
 // eslint-disable-next-line max-lines-per-function
-const Meta: FC<MetaOptions> = ({title = "New Page", description, image, site_name = "jamduo", robots }) => {
+const Meta: FC<MetaOptions> = ({title = "New Page", description, image, site_name = "example_site", robots }) => {
   return (
     <Head>
-      <title>{title} | jamduo</title>
+      <title>{title} | {site_name}</title>
       {description && <meta name="description" content={description} />}
 
       {/* Facebook Meta Tags */}

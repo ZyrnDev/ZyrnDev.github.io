@@ -26,7 +26,7 @@ const Logo: FC = () => {
   return (
     <Heading as="span" m="auto" p="0 0.5em" size='md' >
       <Link href='/' _hover={{ textDecoration: "none" }} _active={{ textDecoration: "none" }} _focus={{ textDecoration: "none" }}>
-        jamduo
+        example_logo
       </Link>
     </Heading>
   );
