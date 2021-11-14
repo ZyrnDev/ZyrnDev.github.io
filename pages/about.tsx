@@ -41,7 +41,7 @@ const profiles: ProfileOptions[] = [
       tag: "Zyrn#0001",
       user_id: "416841964013748234",
     },
-    linkedin: "https://www.linkedin.com/in/mitchell-lee-488570183/",
+    linkedin: "mitchell-lee-488570183",
   },
 ];
 
