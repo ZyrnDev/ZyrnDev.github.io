@@ -1,5 +1,7 @@
 const excludedPaths = [];
 
+const basePath = process.env.BASE_PATH || "";
+
 module.exports = {
     siteUrl: process.env.SITE_URL,
     generateRobotsTxt: true,
@@ -7,7 +9,7 @@ module.exports = {
         policies: [
             {
                 userAgent: '*',
-                allow: [ '/' ],
+                allow: [ `${basePath}/` ],
                 disallow: [ ],
             },
         ]
@@ -17,7 +19,7 @@ module.exports = {
             return null;
         }
         return {
-            loc: path,
+            loc: `${basepath}${path}`,
             changefreq: config.changefreq,
             priority: config.priority,
             lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
