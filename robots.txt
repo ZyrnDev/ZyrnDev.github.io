@@ -6,7 +6,7 @@ Disallow: /uploads/
 Disallow: /blogs/unreleased/
 
 # Host
-Host: https://zyrndev.github.io
+Host: https://zyrn.dev
 
 # Sitemaps
-Sitemap: https://zyrndev.github.io/sitemap.xml
+Sitemap: https://zyrn.dev/sitemap.xml
