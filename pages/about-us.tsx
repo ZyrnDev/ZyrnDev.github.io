@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, BoxProps, ButtonGroup, Flex, Heading } from '@chakra-ui/react';
+import { Box, BoxProps, ButtonGroup, Container, Flex, Heading } from '@chakra-ui/react';
 import Layout from '@components/layouts/centered';
 import { MetaOptions } from "@components/meta";
 import Description from '@components/description';
@@ -58,17 +58,19 @@ const meta: MetaOptions = {
   export default function AboutUs() {
   return (
     <Layout meta={meta}>
-      <Heading as="h1" size="4xl">
-        Who are we?
-      </Heading>
-      <Description as="h2" size="md">
-        example_site: example_description.
-        {/* Justin And Mitch (JAM), a DUO of software developers, working on various passion projects. */}
-      </Description>
-      
-      <Flex as="section" wrap="wrap" textAlign="center">
-        {profiles.map((profile) => (<Profile key={profile.name} {...profile} />))}
-      </Flex>
+      <Container maxW="container.lg">
+        <Heading as="h1" size="4xl">
+          Who are we?
+        </Heading>
+        <Description as="h2" size="md">
+          example_site: example_description.
+          {/* Justin And Mitch (JAM), a DUO of software developers, working on various passion projects. */}
+        </Description>
+        
+        <Flex as="section" wrap="wrap" textAlign="center">
+          {profiles.map((profile) => (<Profile key={profile.name} {...profile} />))}
+        </Flex>
+      </Container>
     </Layout>
   )
 }
