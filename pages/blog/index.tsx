@@ -22,17 +22,25 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-const PreviewMaxLength = 256;
+const MAX_RECURSIVE_DEPTH = 3;
+const MAX_PREVIEW_LENGTH  = 256;
+const HTML_TO_TEXT = (preview: string | undefined, content: string) => {
+  if (preview)
+    return preview;
+
+  var text = content;
+
+  text = text.replaceAll(/<style[^>]*?>.*?<\/style>/gms, ''); // Remove Styles
+  text = text.replaceAll(/<script[^>]*?>.*?<\/script>/gms, ''); // Remove Scripts
+  for (var i = 0; i < MAX_RECURSIVE_DEPTH; i++)
+    text = text.replaceAll(/<\/?[^>]*?>/gms, '');
+  text.replaceAll(/\s+/gm, ' '); // Remove excess white space
+
+  return text.length <= MAX_PREVIEW_LENGTH ? text : text.substring(0, MAX_PREVIEW_LENGTH - 3) + '...';
+}
+
 const PostPreview: FC<Post> = ({ filename, content, preview }) => {
-  var preview_text;
-  
-  if (preview) {
-    preview_text = preview;
-  } else {
-    const paragraphs = [...content.matchAll(/<p>(.+?)<\/p>/g)].map(match => match[1]);
-    const body = paragraphs.join(' ');
-    preview_text = body.length <= PreviewMaxLength ? body : body.substring(0, PreviewMaxLength - 3) + '...';
-  }
+  const preview_text = HTML_TO_TEXT(preview, content);
 
   return (
     <Text>
