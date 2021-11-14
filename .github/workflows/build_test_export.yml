@@ -23,13 +23,13 @@ on:
       artifact-name:
         description: "Name of the artifact to be exported."
         default: "static-content"
-        required: true
+        required: false
         type: string
 
       artifact-path:
         description: "Path to the artifact to be exported."
-        default: "./out/"
-        required: true
+        default: "./out"
+        required: false
         type: string
 
       site-url:
@@ -40,13 +40,13 @@ on:
       base-path:
         description: "The base path of the site to export."
         default: ""
-        required: true
+        required: false
         type: string
       
       asset-prefix:
         description: "The asset prefix of the site to export."
         default: ""
-        required: true
+        required: false
         type: string
       
 
