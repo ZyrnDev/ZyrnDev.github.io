@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://jamduo.github.io/nextjs-template
+
+# Sitemaps
+Sitemap: https://jamduo.github.io/nextjs-template/sitemap.xml
