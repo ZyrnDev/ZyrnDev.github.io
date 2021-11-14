@@ -3,7 +3,7 @@ import { Box, BoxProps, ButtonGroup, Container, Flex, Heading } from '@chakra-ui
 import Layout from '@components/layouts/centered';
 import { MetaOptions } from "@components/meta";
 import Description from '@components/description';
-import { GithubLink, GitlabLink, WebsiteLink, DiscordLink, EmailLink } from "@components/social_links";
+import { GithubLink, GitlabLink, WebsiteLink, DiscordLink, EmailLink, PhoneLink, LinkedinLink, ResumeLink } from "@components/social_links";
 
 interface ProfileOptions {
   name: string;
@@ -13,12 +13,15 @@ interface ProfileOptions {
     name: string;
     url: string;
   },
+  resume?: string;
+  phone?: string;
   github?: string;
   gitlab?: string;
   discord?: {
     tag: string;
     user_id: string;
-  }
+  },
+  linkedin?: string;
 }
 
 const profiles: ProfileOptions[] = [
@@ -26,16 +29,19 @@ const profiles: ProfileOptions[] = [
     name: "Mitch | Zyrn",
     description: "It's ugly, but it works",
     email: "mitch@zyrn.dev",
+    resume: "/Mitchell_Lee_Resume.pdf",
     github: "ZyrnDev",
     gitlab: "Zyrn",
     website: {
       name: "Zyrn.Dev",
       url: "https://zyrn.dev",
     },
+    phone: "+61416684820",
     discord: {
       tag: "Zyrn#0001",
       user_id: "416841964013748234",
     },
+    linkedin: "https://www.linkedin.com/in/mitchell-lee-488570183/",
   },
 ];
 
@@ -64,17 +70,20 @@ const description = "My name is Mitchell 'Zyrn' Lee, and I am a 3rd year softwar
   )
 }
 
-const Profile: FC<BoxProps & ProfileOptions > = ({ name, description, email, github, gitlab, website, discord, children, ...props }) => (
+const Profile: FC<BoxProps & ProfileOptions > = ({ name, description, email, phone, resume, github, gitlab, website, discord, linkedin, children, ...props }) => (
   <Box p="1rem" minW="15rem" m="auto" {...props}>
     <Heading as="h2" size="xl">{name}</Heading>
       
     <Description as="h3" size="md">&quot;{description}&quot;</Description>
     <ButtonGroup>
       {email && <EmailLink email={email} />}
+      {phone && <PhoneLink phone={phone} />}
       {website && <WebsiteLink {...website} />}
+      {resume && <ResumeLink url={resume} />}
       {github && <GithubLink path={github} />}
       {gitlab && <GitlabLink path={gitlab} />}
       {discord && <DiscordLink {...discord} />}
+      {linkedin && <LinkedinLink user_id={linkedin} />}
     </ButtonGroup>
     {children}
   </Box>
