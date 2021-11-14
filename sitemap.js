@@ -9,11 +9,11 @@ module.exports = {
         policies: [
             {
                 userAgent: '*',
-                allow: [ '/' ],
+                allow: [ `${basePath}/` ],
                 disallow: [
-                    '/api/',
-                    '/uploads/',
-                    '/blogs/unreleased/',
+                    `${basePath}/api/`,
+                    `${basePath}/uploads/`,
+                    `${basePath}/blogs/unreleased/`,
                 ],
             },
         ]
