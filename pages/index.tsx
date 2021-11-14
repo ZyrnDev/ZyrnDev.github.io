@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <Layout meta={meta}>
       <Heading as="h1" size="4xl" m="0.83rem 0">
-        Welcome to <Link href="https://www.example.com" isText>example_site!</Link>
+        Welcome to <Link href="https://zyrn.dev" isText>zyrn.dev!</Link>
       </Heading>
       <Description as="h2" size="lg">
         making loveable software together
