@@ -10,7 +10,7 @@ export interface MetaOptions {
 }
 
 // eslint-disable-next-line max-lines-per-function
-const Meta: FC<MetaOptions> = ({title = "New Page", description, image, site_name = "example_site", robots }) => {
+const Meta: FC<MetaOptions> = ({title = "New Page", description, image, site_name = "zyrn", robots }) => {
   return (
     <Head>
       <title>{title} | {site_name}</title>

@@ -7,15 +7,14 @@ on:
 
 jobs:
   build:
-    uses: jamduo/nextjs-template/.github/workflows/build_test_export.yml@main
+    uses: zyrndev/nextjs-template/.github/workflows/build_test_export.yml@main
     with:
       deployment-target: "Staging"
       node-version: "16.x"
       node-environment: "production"
       artifact-name: "static-export-staging"
       artifact-path: "./out"
-      site-url: "https://jamduo.github.io/nextjs-template"
-      base-path: "/nextjs-template"
+      site-url: "https://zyrndev.github.io"
     
   # deploy:
   #   needs: [ build ]
