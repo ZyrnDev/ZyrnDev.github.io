@@ -36,10 +36,25 @@ on:
         description: "The URL of the site to export."
         required: true
         type: string
+      
+      base-path:
+        description: "The base path of the site to export."
+        default: ""
+        required: true
+        type: string
+      
+      asset-prefix:
+        description: "The asset prefix of the site to export."
+        default: ""
+        required: true
+        type: string
+      
 
 env:
   NODE_ENV: ${{ inputs.node-environment }}
   SITE_URL: ${{ inputs.site-url }}
+  BASE_PATH: ${{ inputs.base-path }}
+  ASSET_PREFIX: ${{ inputs.asset-prefix }}
       
 jobs:
   verify:
