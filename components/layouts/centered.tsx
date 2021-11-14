@@ -4,6 +4,7 @@ import { Center, CenterProps } from "@chakra-ui/react";
 import { Footer, content_min_height, footer_height, padding } from "@components/layouts/main"
 import Meta, { MetaOptions } from "@components/meta";
 import { motion } from "framer-motion";
+import { basePath } from "@/lib/env";
 
 const transitionYDistance = 25;
 
@@ -38,7 +39,7 @@ const Layout: FC<CenterProps & { meta: MetaOptions }> = ({ meta = {}, children, 
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={`${basePath}/favicon.ico`} />
       </Head>
       <Meta {...meta} />
       <Animator>

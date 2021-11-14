@@ -3,6 +3,7 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { IconButton, Link as ChakraLink, LinkProps as ChakraLinkProps, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import palette from '@styles/theme/palette';
+import { basePath } from '@/lib/env';
 
 export const ThemeToggleButton: FC<{ size?: string | number }> = ({ size = "1.25em" }) => {
   const { toggleColorMode } = useColorMode();
@@ -21,7 +22,7 @@ export const Link: FC<NextLinkProps & ChakraLinkProps & { isText?: boolean }> = 
   props.color = isText ? colour : "inherit";
 
   return (
-    <NextLink href={props.href} passHref>
+    <NextLink href={`${basePath}${props.href}`} passHref>
       <ChakraLink as="a" {...props}>
         {children}
       </ChakraLink>

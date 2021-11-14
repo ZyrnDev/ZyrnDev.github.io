@@ -2,6 +2,8 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 const enviroment = process.env.NODE_ENV || "development";
+const basePath = process.env.BASE_PATH || "";
+const assetPrefix = process.env.ASSET_PREFIX || "";
 const isProduction = enviroment === 'production';
 
 // eslint-disable-next-line max-lines-per-function
@@ -11,13 +13,13 @@ module.exports = (phase, { defaultConfig }) => {
    * @type {import('next').NextConfig}
    **/
   const baseConfig = {
-      // // Use the prefix in production and not development. If using a CDN, this should be the CDN URL.
-      // assetPrefix: isProduction ? '' : '',
-      ...defaultConfig,
+    ...defaultConfig,
       poweredByHeader: false,
       reactStrictMode: true, // Good Practice apparently
       trailingSlash: true,
-      // swcMinify: true,
+      swcMinify: true,
+      basePath,
+      assetPrefix,
   };
 
   /* development only config options here */
