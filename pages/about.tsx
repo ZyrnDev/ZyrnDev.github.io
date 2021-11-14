@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, BoxProps, ButtonGroup, Flex, Heading } from '@chakra-ui/react';
+import { Box, BoxProps, ButtonGroup, Container, Flex, Heading } from '@chakra-ui/react';
 import Layout from '@components/layouts/centered';
 import { MetaOptions } from "@components/meta";
 import Description from '@components/description';
@@ -48,16 +48,18 @@ const description = "My name is Mitchell 'Zyrn' Lee, and I am a 3rd year softwar
   export default function AboutUs() {
   return (
     <Layout meta={meta}>
-      <Heading as="h1" size="4xl">
+      <Container maxW="container.lg">
+        <Heading as="h1" size="4xl">
         Who am I?
-      </Heading>
-      <Description as="h2" size="md">
-        {description}
-      </Description>
-      
-      <Flex as="section" wrap="wrap" textAlign="center">
-        {profiles.map((profile) => (<Profile key={profile.name} {...profile} />))}
-      </Flex>
+        </Heading>
+        <Description as="h2" size="md">
+          {description}
+        </Description>
+          
+        <Flex as="section" wrap="wrap" textAlign="center">
+          {profiles.map((profile) => (<Profile key={profile.name} {...profile} />))}
+        </Flex>
+      </Container>
     </Layout>
   )
 }
