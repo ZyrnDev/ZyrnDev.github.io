@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: zyrndev/nextjs-template/.github/workflows/build_test_export.yml@main
+    uses: zyrndev/zyrndev.github.io/.github/workflows/build_test_export.yml@development
     with:
       deployment-target: "Staging"
       node-version: "16.x"
@@ -19,7 +19,7 @@ jobs:
   deploy:
     needs: [ build ]
 
-    uses: jamduo/nextjs-template/.github/workflows/deploy.yml@main
+    uses: zyrndev/zyrndev.github.io/.github/workflows/deploy.yml@development
     with:
       deployment-target: "Staging"
       artifact-name: "static-export-staging"

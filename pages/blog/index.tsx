@@ -5,7 +5,7 @@ import Layout from '@components/layouts/centered';
 import { MetaOptions } from '@components/meta';
 import { Link } from '@components/core';
 import { getSortedPosts, Post } from '@/lib/posts';
-import Description from '@components/description';
+import TagLine from '@/components/tagline';
 import { PostTitle } from '@/pages/blog/[filename]';
 
 const meta: MetaOptions = {

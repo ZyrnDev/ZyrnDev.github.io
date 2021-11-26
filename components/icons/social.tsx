@@ -1,30 +1,30 @@
 /* eslint-disable react/jsx-key */
 import { createIcon } from "@chakra-ui/icons";
 
-// https://downloadfreesvgicons.com/icons/technology-icons/svg-email-envelope-icon-1/svg-email-envelope-icon-1.php
-export const EmailIcon = createIcon({
-  displayName: "EmailIcon",
-  viewBox: "0 0 100 100",
-  path: (
-    <>
-      <path d="M84,75H16c-3.3,0-6-2.7-6-6V31c0-3.3,2.7-6,6-6h68c3.3,0,6,2.7,6,6v38C90,72.3,87.3,75,84,75z"/>
-      <g>
-        <line x1="50" y1="56.7" x2="12.2" y2="27.1"/>
-        <line x1="50.2" y1="56.7" x2="88" y2="27.1"/>
-      </g>
-      <line x1="17.9" y1="65.5" x2="38.8" y2="49"/>
-      <line x1="81.8" y1="65.5" x2="60.9" y2="49"/>
-    </>
-  ),
-  defaultProps: {
-    fill: "none",
-    stroke: "#000",
-    strokeWidth: "4",
-    strokeMiterlimit: "10",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-  },
-});
+// // https://downloadfreesvgicons.com/icons/technology-icons/svg-email-envelope-icon-1/svg-email-envelope-icon-1.php
+// export const EmailIcon = createIcon({
+//   displayName: "EmailIcon",
+//   viewBox: "0 0 100 100",
+//   path: (
+//     <>
+//       <path d="M84,75H16c-3.3,0-6-2.7-6-6V31c0-3.3,2.7-6,6-6h68c3.3,0,6,2.7,6,6v38C90,72.3,87.3,75,84,75z"/>
+//       <g>
+//         <line x1="50" y1="56.7" x2="12.2" y2="27.1"/>
+//         <line x1="50.2" y1="56.7" x2="88" y2="27.1"/>
+//       </g>
+//       <line x1="17.9" y1="65.5" x2="38.8" y2="49"/>
+//       <line x1="81.8" y1="65.5" x2="60.9" y2="49"/>
+//     </>
+//   ),
+//   defaultProps: {
+//     fill: "none",
+//     stroke: "#000",
+//     strokeWidth: "4",
+//     strokeMiterlimit: "10",
+//     strokeLinecap: "round",
+//     strokeLinejoin: "round",
+//   },
+// });
 
 export const WebsiteIcon = createIcon({
   displayName: 'WebsiteIcon',

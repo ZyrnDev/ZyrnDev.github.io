@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: zyrndev/nextjs-template/.github/workflows/build_test_export.yml@main
+    uses: zyrndev/zyrndev.github.io/.github/workflows/build_test_export.yml@main
     with:
       deployment-target: "Production"
       node-version: "16.x"
@@ -19,7 +19,7 @@ jobs:
   deploy:
     needs: [ build ]
 
-    uses: jamduo/nextjs-template/.github/workflows/deploy.yml@main
+    uses: zyrndev/zyrndev.github.io/.github/workflows/deploy.yml@main
     with:
       deployment-target: "Production"
       artifact-name: "static-export-production"
