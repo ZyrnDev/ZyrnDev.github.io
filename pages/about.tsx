@@ -1,9 +1,10 @@
 import React, { FC } from "react";
-import { Box, BoxProps, ButtonGroup, Container, Flex, Heading } from '@chakra-ui/react';
+import { Box, BoxProps, ButtonGroup, Container, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import Layout from '@components/layouts/centered';
 import { MetaOptions } from "@components/meta";
-import Description from '@components/description';
 import { GithubLink, GitlabLink, WebsiteLink, DiscordLink, EmailLink, PhoneLink, LinkedinLink, ResumeLink } from "@components/social_links";
+import TagLine from '@components/tagline';
+import Description from "@components/description";
 
 interface ProfileOptions {
   name: string;
@@ -31,7 +32,7 @@ const profiles: ProfileOptions[] = [
     email: "mitch@zyrn.dev",
     resume: "/Mitchell_Lee_Resume.pdf",
     github: "ZyrnDev",
-    gitlab: "Zyrn",
+    // gitlab: "Zyrn",
     website: {
       name: "Zyrn.Dev",
       url: "https://zyrn.dev",
@@ -58,7 +59,7 @@ const description = "My name is Mitchell 'Zyrn' Lee, and I am a 3rd year softwar
         <Heading as="h1" size="4xl">
         Who am I?
         </Heading>
-        <Description as="h2" size="md">
+        <Description as="h2" size="md" textAlign="left">
           {description}
         </Description>
           
@@ -74,7 +75,7 @@ const Profile: FC<BoxProps & ProfileOptions > = ({ name, description, email, pho
   <Box p="1rem" minW="15rem" m="auto" {...props}>
     <Heading as="h2" size="xl">{name}</Heading>
       
-    <Description as="h3" size="md">&quot;{description}&quot;</Description>
+    <TagLine as="h3" size="md">&quot;{description}&quot;</TagLine>
     <ButtonGroup>
       {email && <EmailLink email={email} />}
       {phone && <PhoneLink phone={phone} />}
