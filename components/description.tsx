@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const Description: FC<HeadingProps | { [key: string]: string }> = ({children, colorScheme = "gray", ...props}) => {
   return (
-    <Heading color={useColorModeValue(`${colorScheme}.600`, `${colorScheme}.400`)} {...props}>
+    <Heading color={useColorModeValue(`${colorScheme}.700`, `${colorScheme}.300`)} {...props}>
       {children}
     </Heading>
   );

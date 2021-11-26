@@ -59,7 +59,7 @@ const description = "My name is Mitchell 'Zyrn' Lee, and I am a 3rd year softwar
         <Heading as="h1" size="4xl">
         Who am I?
         </Heading>
-        <Description as="h2" size="md">
+        <Description as="h2" size="md" textAlign="left">
           {description}
         </Description>
           
