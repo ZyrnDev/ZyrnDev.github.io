@@ -17,7 +17,7 @@ export default function Home() {
         Welcome to <Link href="https://zyrn.dev" isText>zyrn.dev!</Link>
       </Heading>
       <TagLine as="h2" size="lg">
-        making loveable software together
+        making cool software for over a decade
       </TagLine>
     </Layout>
   )
