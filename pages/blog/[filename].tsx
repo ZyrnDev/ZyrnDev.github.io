@@ -26,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title, date, author, published, isPreview = false }) => {
   const titleSize = isPreview ? 'lg' : '2xl';
   const bottomMargin = isPreview ? 0 : "0.8em";
-  var Title = <Heading as="h1" size={titleSize} mb="0.1em">{ published || (<Text as="span" color="red">(Not Published) </Text>) }{title}</Heading>;
+  var Title = <TagLine as="h1" size={titleSize} m="0.1em 0">{ published || (<Text as="span" color="red">(Not Published) </Text>) }{title}</TagLine>;
   if (isPreview) {
     Title = <Link href={`/blog/${filename}`}>{Title}</Link>;
   }
@@ -34,9 +34,9 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
     <>
       {Title}
       <Flex align="center">
-        <TagLine as="h2" size="sm" m="0" mb={bottomMargin}>by {author}</TagLine>
+        <TagLine as="h2" size="sm" m="0" mb={bottomMargin} colorScheme="gray">by {author}</TagLine>
         <Spacer />
-        <TagLine as="time" size="sm" m="0" mb={bottomMargin} dateTime={(new Date(date)).toISOString()}>{date}</TagLine>
+        <TagLine as="time" size="sm" m="0" mb={bottomMargin} colorScheme="gray" dateTime={(new Date(date)).toISOString()}>{date}</TagLine>
       </Flex>
     </>
   );

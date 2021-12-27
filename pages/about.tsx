@@ -4,7 +4,6 @@ import Layout from '@components/layouts/centered';
 import { MetaOptions } from "@components/meta";
 import { GithubLink, GitlabLink, WebsiteLink, DiscordLink, EmailLink, PhoneLink, LinkedinLink, ResumeLink } from "@components/social_links";
 import TagLine from '@components/tagline';
-import Description from "@components/description";
 
 interface ProfileOptions {
   name: string;
@@ -56,12 +55,12 @@ const description = "My name is Mitchell 'Zyrn' Lee, and I am a 3rd year softwar
   return (
     <Layout meta={meta}>
       <Container maxW="container.lg">
-        <Heading as="h1" size="4xl">
+        <TagLine as="h1" size="4xl">
         Who am I?
-        </Heading>
-        <Description as="h2" size="md" textAlign="left">
+        </TagLine>
+        <Heading as="h2" size="md" textAlign="left">
           {description}
-        </Description>
+        </Heading>
           
         <Flex as="section" wrap="wrap" textAlign="center">
           {profiles.map((profile) => (<Profile key={profile.name} {...profile} />))}
@@ -73,9 +72,9 @@ const description = "My name is Mitchell 'Zyrn' Lee, and I am a 3rd year softwar
 
 const Profile: FC<BoxProps & ProfileOptions > = ({ name, description, email, phone, resume, github, gitlab, website, discord, linkedin, children, ...props }) => (
   <Box p="1rem" minW="15rem" m="auto" {...props}>
-    <Heading as="h2" size="xl">{name}</Heading>
+    <TagLine as="h2" size="xl">{name}</TagLine>
       
-    <TagLine as="h3" size="md">&quot;{description}&quot;</TagLine>
+    <Heading as="h3" size="md" colorScheme="gray">&quot;{description}&quot;</Heading>
     <ButtonGroup>
       {email && <EmailLink email={email} />}
       {phone && <PhoneLink phone={phone} />}

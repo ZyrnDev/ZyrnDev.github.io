@@ -23,6 +23,23 @@ export interface Post extends PostMetaData {
   content: string
 }
 
+const MAX_RECURSIVE_DEPTH = 3;
+const MAX_PREVIEW_LENGTH  = 300;
+const generatePreview = (preview: string | undefined, content: string) => {
+  if (preview)
+    return preview;
+
+  var text = content;
+
+  text = text.replaceAll(/<style[^>]*?>.*?<\/style>/gms, ''); // Remove Styles
+  text = text.replaceAll(/<script[^>]*?>.*?<\/script>/gms, ''); // Remove Scripts
+  for (var i = 0; i < MAX_RECURSIVE_DEPTH; i++)
+    text = text.replaceAll(/<\/?[^>]*?>/gms, '');
+  text.replaceAll(/\s+/gm, ' '); // Remove excess white space
+
+  return text.length <= MAX_PREVIEW_LENGTH ? text : text.substring(0, MAX_PREVIEW_LENGTH - 3) + '...';
+}
+
 const fileExt = /\.md$/;
 
 const markdown_pipeline = remark()
@@ -65,6 +82,7 @@ export async function getPost(filename: string): Promise<Post> {
   const content = await markdown_pipeline.process(rawContent).then(result => result.toString());
   return {
     filename,
+    preview: generatePreview(metadata.preview, content),
     ...metadata,
     content,
   };
