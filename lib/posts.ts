@@ -7,7 +7,40 @@ import gfm from 'remark-gfm';
 import prism from 'remark-prism';
 import { is_dev } from '@lib/env';
 
-const postsDirectory = path.join(process.cwd(), 'posts')
+const postsDirectory = path.join(process.cwd(), 'posts');
+
+const posts: { [key: string]: Post } = {};
+import crypto from 'crypto';
+function md5_hash(data: string): string {
+  return crypto.createHash('md5').update(data ?? "").digest('hex');
+}
+
+const cacheFile = path.join(postsDirectory, 'cache.json');
+function getCachedPost(filename: string, hash: string): Post | undefined {
+  if (!fs.existsSync(cacheFile))
+    return undefined;
+
+  const cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
+  const cached_post = cache[filename];
+
+  if (cached_post && cached_post.hash == hash) {
+    // console.log("Cache hit for " + filename);
+    delete cached_post.hash;
+    return cached_post;
+  }
+
+  return undefined;
+}
+
+function storeCachedPost(post: Post, hash: string) {
+  const cache: { [key: string]: CachedPost } = fs.existsSync(cacheFile) ? JSON.parse(fs.readFileSync(cacheFile, 'utf8')) : {};
+  cache[post.filename] = {
+    hash,
+    ...post
+  };
+  fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2));
+}
+
 
 export interface PostMetaData {
   date: string,
@@ -21,6 +54,10 @@ export interface PostMetaData {
 export interface Post extends PostMetaData {
   filename: string,
   content: string
+}
+
+export interface CachedPost extends Post {
+  hash: string
 }
 
 const MAX_RECURSIVE_DEPTH = 3;
@@ -77,13 +114,19 @@ export async function getPost(filename: string): Promise<Post> {
   const fullPath = path.join(postsDirectory, filename + ".md");
   const fileContents = await fs.promises.readFile(fullPath, 'utf8');
   
-  // Use gray-matter to parse the post metadata section
+  const hash = md5_hash(fileContents);
+  const cached_post = getCachedPost(filename, hash); 
+  if (cached_post) return cached_post;
+  
   const { content: rawContent, data: metadata }: { content: string, data: PostMetaData } = matter(fileContents) as any;
   const content = await markdown_pipeline.process(rawContent).then(result => result.toString());
-  return {
+  const post: Post = {
     filename,
     preview: generatePreview(metadata.preview, content),
     ...metadata,
     content,
   };
+
+  storeCachedPost(post, hash);
+  return post;
 }
