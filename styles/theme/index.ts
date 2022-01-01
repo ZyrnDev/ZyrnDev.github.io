@@ -3,6 +3,7 @@ import { extendTheme } from "@chakra-ui/react"
 import { mode } from '@chakra-ui/theme-tools';
 import components from "./components";
 import palette from "./palette";
+import defaultCSS from "@styles/theme/default";
 
 const colors = {
   light: palette.light,
@@ -13,50 +14,15 @@ const colors = {
 const styles = {
   //This is mean to change the core colours of the theme (but the default theme is already good!?!?!)
   global: (props: any) => ({
-    "*, *::before, ::after": {
-      borderWidth: 0,
-      borderStyle: "solid",
-      boxSizing: "border-box",
+    "body": {
+      backgroundColor: mode("gray.50", "gray.900")(props),
     },
-    html: {
-      "lineHeight": 1.5,
-      "WebkitTextSizeAdjust": "100%",
-      "fontFamily": "system-ui,sans-serif",
-      "WebkitFontSmoothing": "antialiased",
-      "textRendering": "optimizeLegibility",
-      "MozOsxFontSmoothing": "grayscale",
-      "touchAction": "manipulation",
-    },
-    body: {
-      margin: 0,
-      // color: mode(palette.light.foreground, palette.dark.foreground)(props),
-      // bgColor: mode(palette.light.base, palette.dark.base)(props),
-    },
-    "article #blog-article a": {
-      color: mode(palette.light.cyan, palette.dark.cyan)(props),
-      
-    },
-    "article #blog-article a:hover, article #blog-article a:focus": {
-      textDecoration: "underline",
-    },
-    a: {
-      textDecoration: "inherit",
-      backgroundColor: "transparent",
-    },
-    button: {
-      lineHeight: "inherit",
-      backgroundColor: "transparent",
-    },
-    'button, input, optgroup, select, textarea': {
-      padding: 0,
-      lineHeight: "inherit",
-      color: "inherit",
-      fontFamily: "inherit",
-      fontSize: "100%",
-      margin: 0,
-    },
-    'button, [role="button"]': {
-      cursor: "pointer",
+    "article #blog-article": {
+      "a": {
+        color: mode(palette.light.cyan, palette.dark.cyan)(props),
+        textDecoration: "underline",
+      },
+      ...defaultCSS
     },
   }),
 };

@@ -39,5 +39,5 @@ Until then keep learning!
 [4]: https://docs.github.com/en/actions/reference/encrypted-secrets "Github Secrets Documentation"
 [5]: https://github.com/appleboy "Appleboy's Github"
 [6]: /images/pipelines_ci_cd/actions_logs.png "Github Actions History"
-[7]: https://www.raspberrypi.org/homepage-9df4b/static/a6331df010eb56a7fafb04466af3f1aa/e6ab8/3a15d4da-46e3-4940-8be6-9fc7d201affe_RPi_4B_FEATURED.jpg "Raspberry Pi 4 Model B"
+[7]: https://assets.raspberrypi.com/static/raspberry-pi-4-labelled-e7f2e1d0bd4acdae2368c7ebd7b2028f.png "Raspberry Pi 4 Model B"
 [8]: /images/pipelines_ci_cd/ssh_action.png "SSH Action"

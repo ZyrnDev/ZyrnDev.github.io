@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { Box, Container, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react';
 import { getPost, getPostPaths, Post } from '@/lib/posts';
 import Layout from '@components/layouts/centered';
 import TagLine from '@/components/tagline';
-import { Link } from '@components/core';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPost(params?.filename as string)
@@ -25,18 +24,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title, date, author, published, isPreview = false }) => {
   const titleSize = isPreview ? 'lg' : '2xl';
-  const bottomMargin = isPreview ? 0 : "0.8em";
-  var Title = <Heading as="h1" size={titleSize} mb="0.1em">{ published || (<Text as="span" color="red">(Not Published) </Text>) }{title}</Heading>;
-  if (isPreview) {
-    Title = <Link href={`/blog/${filename}`}>{Title}</Link>;
-  }
+  const subTitleSize = isPreview ? 'sm' : 'md';
+  const bottomMargin = "0.8rem";
+  const textDecoration = isPreview ? 'underline' : 'none';
   return (
     <>
-      {Title}
+      <TagLine as="h1" size={titleSize} m="0.1em 0" textDecoration={textDecoration}>{ published || (<Text as="span" color="red">(Not Published) </Text>) }{title}</TagLine>
       <Flex align="center">
-        <TagLine as="h2" size="sm" m="0" mb={bottomMargin}>by {author}</TagLine>
+        <Heading as="h2" size={subTitleSize} m="0" mb={bottomMargin} colorScheme="gray">by {author}</Heading>
         <Spacer />
-        <TagLine as="time" size="sm" m="0" mb={bottomMargin} dateTime={(new Date(date)).toISOString()}>{date}</TagLine>
+        <Heading as="time" size={subTitleSize} m="0" mb={bottomMargin} colorScheme="gray" dateTime={(new Date(date)).toISOString()}>{date}</Heading>
       </Flex>
     </>
   );

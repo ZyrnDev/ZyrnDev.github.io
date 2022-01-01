@@ -7,12 +7,17 @@ published: true
 
 <style>
     div.screenshot-image-view {
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
         text-align: center;
     }
     
     div.screenshot-image-view img {
         max-width: 48%;
-        min-width: 250px;
+        min-width: 350px;
         padding: 2px;
         border-radius: 10px;
     }
