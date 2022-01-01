@@ -43,7 +43,7 @@ const Layout: FC<CenterProps & { meta: MetaOptions }> = ({ meta = {}, children, 
       </Head>
       <Meta {...meta} />
       <Animator>
-        <Center minH={minH} flexDir="column" as="section" flex="1" p="1rem" textAlign="center" {...props}>
+        <Center minH={minH} flexDir="column" as="section" flex="1" textAlign="center" {...props}>
           {children}
         </Center>
         <Footer p={padding} h={footer_height}/> 

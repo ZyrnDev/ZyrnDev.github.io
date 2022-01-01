@@ -1,5 +1,5 @@
-import { FC, JSXElementConstructor, ReactElement } from "react";
-import { IconButton, IconProps } from "@chakra-ui/react";
+import { FC } from "react";
+import { IconButton, IconProps, useColorModeValue } from "@chakra-ui/react";
 import { DownloadIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { Link } from "@components/core";
 import { GithubIcon, GitlabIcon, WebsiteIcon, DiscordIcon, LinkedinIcon } from "@components/icons/social";
@@ -9,7 +9,7 @@ export const SocialLink: FC<{ name: string, Icon: import("@chakra-ui/system").Co
   <Link href={url} isExternal>
     <IconButton 
       aria-label={name}
-      icon={(<Icon boxSize={size} color="black"/>)}
+      icon={(<Icon boxSize={size} />)}
     />
   </Link>
 );

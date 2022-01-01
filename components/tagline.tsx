@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const TagLine: FC<HeadingProps | { [key: string]: string }> = ({children, colorScheme = "green", ...props}) => {
   return (
-    <Heading color={useColorModeValue(`${colorScheme}.400`, `${colorScheme}.600`)} {...props}>
+    <Heading color={useColorModeValue(`${colorScheme}.400`, `${colorScheme}.200`)} {...props}>
       {children}
     </Heading>
   );
