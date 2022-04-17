@@ -55,7 +55,8 @@ env:
   SITE_URL: ${{ inputs.site-url }}
   BASE_PATH: ${{ inputs.base-path }}
   ASSET_PREFIX: ${{ inputs.asset-prefix }}
-  VERSION: ${{ github.sha }}
+  COMMIT_HASH: ${{ github.sha }}
+  COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
   
 jobs:
   verify:

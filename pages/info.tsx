@@ -19,14 +19,16 @@ const meta: MetaOptions = {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      version: env.version,
+      commit_hash: env.commit_hash,
+      commit_message: env.commit_message,
       time: (new Date()).getTime()
     },
   };
 }
 
 type BuildStats = {
-  version: string;
+  commit_hash: string;
+  commit_message: string;
   time: number;
 }
 
@@ -62,7 +64,8 @@ const Info: NextPage<BuildStats> = (buildStats) => {
         Information
       </Heading>
       <Stats stats={[
-        ["Build Commit", buildStats.version],
+        ["Build Commit Hash", buildStats.commit_hash],
+        ["Build Commit Message", buildStats.commit_message],
         ["Build Time", (new Date(buildStats.time)).toLocaleString("en-AU", {timeZone: "Australia/Sydney"}) + " (AEST)"],
 
       ]} />
