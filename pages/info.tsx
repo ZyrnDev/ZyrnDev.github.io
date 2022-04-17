@@ -68,6 +68,7 @@ const Info: NextPage<BuildStats> = (buildStats) => {
       <Stats stats={[
         ["Build Commit Hash", buildStats.commit_hash],
         ["Build Commit Message", buildStats.commit_message],
+        ["Build Commit Ref", buildStats.commit_ref],
         ["Build Time", (new Date(buildStats.time)).toLocaleString("en-AU", {timeZone: "Australia/Sydney"}) + " (AEST)"],
 
       ]} />
