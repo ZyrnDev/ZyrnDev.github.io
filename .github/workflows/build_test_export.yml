@@ -55,7 +55,8 @@ env:
   SITE_URL: ${{ inputs.site-url }}
   BASE_PATH: ${{ inputs.base-path }}
   ASSET_PREFIX: ${{ inputs.asset-prefix }}
-      
+  VERSION: ${{ github.head_ref }}.${{ github.sha }}
+  
 jobs:
   verify:
     name: "Build, Test & Export"
