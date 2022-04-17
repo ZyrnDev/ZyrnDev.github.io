@@ -34,7 +34,7 @@ const Stats: FC<{ stats: string[][]}> = ({ stats }) => {
   return (
     <Grid templateColumns="repeat(2, 1fr)">
       {stats.map(([key, value]) => (
-        <Stat name={key} value={value} />
+        <Stat key={key} name={key} value={value} />
       ))}
     </Grid>
   );
