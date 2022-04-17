@@ -21,6 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       commit_hash: env.commit_hash,
       commit_message: env.commit_message,
+      commit_ref: env.commit_ref,
       time: (new Date()).getTime()
     },
   };
@@ -29,6 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
 type BuildStats = {
   commit_hash: string;
   commit_message: string;
+  commit_ref: string;
   time: number;
 }
 
