@@ -14,7 +14,9 @@ const meta: MetaOptions = {
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
-    version: env.version,
+    props: {
+      version: env.version,
+    },
   };
 }
 
