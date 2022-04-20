@@ -48,7 +48,7 @@ export const PostTags: FC<{ tags: string[], headingSize: string, tagSize: string
     <Flex>
       <Heading as="h4" m="auto 0" mr="0.6rem" size={headingSize}>Tags: </Heading>
       {tags?.map(tag => (
-        <Link href={`/blog/tags/${tag}`} key={tag} mr="0.6em">
+        <Link href={`/blog/tags/${encodeURIComponent(tag)}`} key={tag} mr="0.6em">
           <Tag size={tagSize}>
             {tag}
           </Tag>

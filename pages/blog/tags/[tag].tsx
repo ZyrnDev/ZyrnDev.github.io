@@ -7,7 +7,8 @@ import { FC } from "react";
 import { Container, Heading, Text } from '@chakra-ui/react';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const posts = await getPostsByTag(params?.tag as string);
+  const posts = await getPostsByTag(decodeURIComponent(params?.tag as string));
+  
   return {
     props: {
       posts,
@@ -18,6 +19,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getTagPaths();
+
   return {
     paths,
     fallback: false
