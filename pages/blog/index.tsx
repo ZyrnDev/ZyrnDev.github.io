@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 
-const PostDescription: FC<Post> = ({ children, ...post }) => {
+export const PostDescription: FC<Post> = ({ children, ...post }) => {
   const bgColour = useColorModeValue("gray.100", "gray.800");
   // const bgColour = "green.500";
   const background = { 

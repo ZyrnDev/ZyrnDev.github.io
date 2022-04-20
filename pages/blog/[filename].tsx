@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { Box, Container, Flex, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading,  Spacer, Tag, Text } from '@chakra-ui/react';
 import { getPost, getPostPaths, Post } from '@/lib/posts';
+import { Link } from '@components/core';
 import Layout from '@components/layouts/centered';
 import TagLine from '@/components/tagline';
 
@@ -22,10 +23,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title, date, author, published, isPreview = false }) => {
+export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title, date, author, published, tags, isPreview = false }) => {
   const titleSize = isPreview ? 'lg' : '2xl';
   const subTitleSize = isPreview ? 'sm' : 'md';
-  const bottomMargin = "0.8rem";
+  const tagSize = isPreview ? 'md' : 'lg';
+  const bottomMargin = isPreview ? "0.3rem" : "0.6rem"; //"0.8rem";
   const textDecoration = isPreview ? 'underline' : 'none';
   return (
     <>
@@ -34,6 +36,16 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
         <Heading as="h2" size={subTitleSize} m="0" mb={bottomMargin} colorScheme="gray">by {author}</Heading>
         <Spacer />
         <Heading as="time" size={subTitleSize} m="0" mb={bottomMargin} colorScheme="gray" dateTime={(new Date(date)).toISOString()}>{date}</Heading>
+      </Flex>
+      <Flex>
+        <Heading as="h4" m="auto 0" mr="0.6rem" size={subTitleSize}>Tags: </Heading>
+        {tags?.map(tag => (
+          <Link href={`/blog/tags/${tag}`} key={tag} mr="0.6em">
+            <Tag size={tagSize}  _hover={{ textDecoration: "underline" }}>
+              {tag}
+            </Tag>
+          </Link>
+        ))}
       </Flex>
     </>
   );

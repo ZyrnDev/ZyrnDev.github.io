@@ -47,6 +47,7 @@ export interface PostMetaData {
   title: string,
   author: string,
   published: boolean,
+  tags: string[],
   preview?: string,
   [key: string]: string | any | undefined
 }
@@ -91,6 +92,23 @@ export function getPostFileNames() {
     .map(filename => filename.replace(fileExt, ''));
 }
 
+export async function getTags(): Promise<string[]> {
+  const filenames = getPostFileNames();
+  const post_promises = filenames.map(filename => getPost(filename))
+  const posts = await Promise.all(post_promises)
+
+  const tags = posts.filter(post => post.published || is_dev).reduce((tags, post) => {
+    post.tags?.forEach(tag => {
+      if (!tags.has(tag)) {
+        tags.add(tag);
+      }
+    });
+    return tags;
+  }, new Set<string>());
+
+  return Array.from(tags); // Allow unpublished posts in dev mode
+}
+
 export async function getPosts(): Promise<Post[]> {
   const filenames = getPostFileNames();
   const post_promises = filenames.map(filename => getPost(filename))
@@ -103,6 +121,16 @@ const sortByDateDesc = (a: PostMetaData, b: PostMetaData) => (new Date(b.date)).
 export async function getSortedPosts(): Promise<PostMetaData[]> {
   const posts = await getPosts();
   return posts.sort(sortByDateDesc);
+}
+
+export async function getPostsByTag(tag: string): Promise<Post[]> {
+  const posts = await getPosts();
+  return posts.filter(post => post.published || is_dev).filter(post => post.tags?.includes(tag));
+}
+
+export async function getTagPaths(): Promise<{ params: { tag: string } }[]> {
+  const tags = await getTags();
+  return tags.map(tag => ({ params: { tag } }));
 }
 
 export async function getPostPaths(): Promise<{ params: { filename: string } }[]> {
