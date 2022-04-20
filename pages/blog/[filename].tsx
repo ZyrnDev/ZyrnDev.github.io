@@ -29,6 +29,7 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
   const tagSize = isPreview ? 'md' : 'lg';
   const bottomMargin = isPreview ? "0.3rem" : "0.6rem"; //"0.8rem";
   const textDecoration = isPreview ? 'underline' : 'none';
+
   return (
     <>
       <TagLine as="h1" size={titleSize} m="0.1em 0" textDecoration={textDecoration}>{ published || (<Text as="span" color="red">(Not Published) </Text>) }{title}</TagLine>
@@ -37,18 +38,24 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
         <Spacer />
         <Heading as="time" size={subTitleSize} m="0" mb={bottomMargin} colorScheme="gray" dateTime={(new Date(date)).toISOString()}>{date}</Heading>
       </Flex>
-      <Flex>
-        <Heading as="h4" m="auto 0" mr="0.6rem" size={subTitleSize}>Tags: </Heading>
-        {tags?.map(tag => (
-          <Link href={`/blog/tags/${tag}`} key={tag} mr="0.6em">
-            <Tag size={tagSize}  _hover={{ textDecoration: "underline" }}>
-              {tag}
-            </Tag>
-          </Link>
-        ))}
-      </Flex>
+      <PostTags tags={tags} headingSize={subTitleSize} tagSize={tagSize} />
     </>
   );
+};
+
+export const PostTags: FC<{ tags: string[], headingSize: string, tagSize: string }> = ({ tags, headingSize, tagSize }) => {
+  return (
+    <Flex>
+      <Heading as="h4" m="auto 0" mr="0.6rem" size={headingSize}>Tags: </Heading>
+      {tags?.map(tag => (
+        <Link href={`/blog/tags/${tag}`} key={tag} mr="0.6em">
+          <Tag size={tagSize}>
+            {tag}
+          </Tag>
+        </Link>
+      ))}
+    </Flex>
+  )
 };
 
 const Render: FC<Post> = ({ children, ...post }) => {

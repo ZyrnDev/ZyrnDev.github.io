@@ -33,7 +33,7 @@ const Render: FC<{ tag: string, posts: Post[] }> = ({ tag, posts }) => {
   return (
     <Layout meta={meta}>
       <Container maxW="container.lg" p="0 0.5em">
-        <Heading as="h1" size="4xl">Posts Tagged as '{tag}'</Heading>
+        <Heading as="h1" size="4xl">Posts Tagged as &apos;{tag}&apos;</Heading>
         <br/>
         {posts.map(post => <PostDescription key={post.title} {...post} />)}
       </Container>
