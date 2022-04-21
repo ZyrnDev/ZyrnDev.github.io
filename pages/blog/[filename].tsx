@@ -45,11 +45,11 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
 
 export const PostTags: FC<{ tags: string[], headingSize: string, tagSize: string }> = ({ tags, headingSize, tagSize }) => {
   return (
-    <Flex>
+    <Flex wrap="wrap">
       <Heading as="h4" m="auto 0" mr="0.6rem" size={headingSize}>Tags: </Heading>
       {tags?.map(tag => (
-        <Link href={`/blog/tags/${encodeURIComponent(tag)}`} key={tag} mr="0.6em">
-          <Tag size={tagSize}>
+        <Link href={`/blog/tags/${encodeURIComponent(tag)}`} key={tag} display="inline-flex" m="0.2rem 0" mr="0.6em">
+          <Tag size={tagSize} whiteSpace="nowrap">
             {tag}
           </Tag>
         </Link>

@@ -50,6 +50,10 @@ const Blog: NextPage<{ posts: Post[] }> = ({ posts }) => {
       <Container maxW="container.lg" p="0 0.5em">
         <Heading as="h1" size="4xl">Blog Posts</Heading>
         <br/>
+        <Link href="/blog/tags/">
+          <Heading as="h3" size="lg" mt="0">View Tags</Heading>
+        </Link>
+        <br/>
         {posts.map(post => <PostDescription key={post.title} {...post} />)}
       </Container>
     </Layout>

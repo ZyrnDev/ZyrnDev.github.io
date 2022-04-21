@@ -1,18 +1,17 @@
 import Layout from "@/components/layouts/centered";
 import { PostDescription } from '@/pages/blog/index';
 import { MetaOptions } from "@/components/meta";
-import { getPost, getPostPaths, getPostsByTag, getTagPaths, Post } from "@/lib/posts";
+import { getTag, getTagPaths, Post, Tag } from "@/lib/posts";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { FC } from "react";
-import { Container, Heading, Text } from '@chakra-ui/react';
+import { Container, Heading } from '@chakra-ui/react';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const posts = await getPostsByTag(params?.tag as string);
+  const tag = await getTag(params?.tag as string);
   
   return {
     props: {
-      posts,
-      tag: params?.tag as string,
+      tag,
     }
   }
 }
@@ -26,18 +25,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
+// TODO(Mitch): Fix Metadata
 const meta: MetaOptions = {
   title: "Home",
   description: "zyrn.dev's offical website for all our projects, products and services.",
 };
 
-const Render: FC<{ tag: string, posts: Post[] }> = ({ tag, posts }) => {
+const Render: FC<{ tag: Tag }> = ({ tag }) => {
   return (
     <Layout meta={meta}>
       <Container maxW="container.lg" p="0 0.5em">
-        <Heading as="h1" size="4xl">Posts Tagged as &apos;{tag}&apos;</Heading>
+        <Heading as="h1" size="4xl">Posts Tagged as &apos;{tag.name}&apos;</Heading>
         <br/>
-        {posts.map(post => <PostDescription key={post.title} {...post} />)}
+        {tag.posts.map(post => <PostDescription key={post.title} {...post} />)}
       </Container>
     </Layout>
   )

@@ -41,6 +41,10 @@ function storeCachedPost(post: Post, hash: string) {
   fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2));
 }
 
+export interface Tag {
+  name: string;
+  posts: Post[];
+}
 
 export interface PostMetaData {
   date: string,
@@ -93,32 +97,33 @@ export function getPostFileNames() {
 }
 
 const invalidTagCaracters = /[\/<>:"\\\|\?\*]/g;
-function validateTags(tags: string[]) {
+function validateTags(tags: Tag[]) {
   // Check for possible url encoding issues / file system issues
   tags.forEach(tag => {
-    if (invalidTagCaracters.test(tag)) {
-      console.log(`Invalid tag: ${tag}`);
-      throw new Error(`Invalid tag: "${tag}"`);
+    if (invalidTagCaracters.test(tag.name)) {
+      throw new Error(`Invalid tag: "${tag.name}"`);
     }
   })
 }
 
+export async function getTags(): Promise<Tag[]> {
+  const posts = await getPosts();
 
-export async function getTags(): Promise<string[]> {
-  const filenames = getPostFileNames();
-  const post_promises = filenames.map(filename => getPost(filename))
-  const posts = await Promise.all(post_promises)
-
-  const tagsSet = posts.filter(post => post.published || is_dev).reduce((tags, post) => {
+  const tagsMap = posts.filter(post => post.published || is_dev).reduce((tags, post) => {
     post.tags?.forEach(tag => {
-      if (!tags.has(tag)) {
-        tags.add(tag);
-      }
+      let mapTag = tags.get(tag) ?? {
+        name: tag,
+        posts: []
+      };
+
+      mapTag.posts.push(post);
+
+      tags.set(tag, mapTag);
     });
     return tags;
-  }, new Set<string>());
+  }, new Map<string, Tag>());
   
-  const tags = Array.from(tagsSet);
+  const tags = Array.from(tagsMap.values());
   validateTags(tags);
   return tags; // Allow unpublished posts in dev mode
 }
@@ -131,20 +136,27 @@ export async function getPosts(): Promise<Post[]> {
   return posts.filter(post => post.published || is_dev); // Allow unpublished posts in dev mode
 }
 
+const sortByPostCountDesc = (a: Tag, b: Tag) => (b.posts.length - a.posts.length);
+export async function getTagsSortedByPostCount(): Promise<Tag[]> {
+  const tags = await getTags();
+  const sorted_tags = tags.sort(sortByPostCountDesc);
+  return sorted_tags;
+}
+
 const sortByDateDesc = (a: PostMetaData, b: PostMetaData) => (new Date(b.date)).getTime() - (new Date(a.date)).getTime();
 export async function getSortedPosts(): Promise<PostMetaData[]> {
   const posts = await getPosts();
   return posts.sort(sortByDateDesc);
 }
 
-export async function getPostsByTag(tag: string): Promise<Post[]> {
-  const posts = await getPosts();
-  return posts.filter(post => post.published || is_dev).filter(post => post.tags?.includes(tag));
+export async function getTag(tag: string): Promise<Tag | undefined> {
+  const tags = await getTags();
+  return tags.find(t => t.name == tag);
 }
 
 export async function getTagPaths(): Promise<{ params: { tag: string } }[]> {
   const tags = await getTags();
-  return tags.map(tag => ({ params: { tag } }));
+  return tags.map(tag => ({ params: { tag: tag.name } }));
 }
 
 export async function getPostPaths(): Promise<{ params: { filename: string } }[]> {
