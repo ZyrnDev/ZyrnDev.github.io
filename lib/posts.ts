@@ -92,12 +92,24 @@ export function getPostFileNames() {
     .map(filename => filename.replace(fileExt, ''));
 }
 
+const invalidTagCaracters = /[\/<>:"\\\|\?\*]/g;
+function validateTags(tags: string[]) {
+  // Check for possible url encoding issues / file system issues
+  tags.forEach(tag => {
+    if (invalidTagCaracters.test(tag)) {
+      console.log(`Invalid tag: ${tag}`);
+      throw new Error(`Invalid tag: ${tag}`);
+    }
+  })
+}
+
+
 export async function getTags(): Promise<string[]> {
   const filenames = getPostFileNames();
   const post_promises = filenames.map(filename => getPost(filename))
   const posts = await Promise.all(post_promises)
 
-  const tags = posts.filter(post => post.published || is_dev).reduce((tags, post) => {
+  const tagsSet = posts.filter(post => post.published || is_dev).reduce((tags, post) => {
     post.tags?.forEach(tag => {
       if (!tags.has(tag)) {
         tags.add(tag);
@@ -105,8 +117,10 @@ export async function getTags(): Promise<string[]> {
     });
     return tags;
   }, new Set<string>());
-
-  return Array.from(tags); // Allow unpublished posts in dev mode
+  
+  const tags = Array.from(tagsSet);
+  validateTags(tags);
+  return tags; // Allow unpublished posts in dev mode
 }
 
 export async function getPosts(): Promise<Post[]> {
