@@ -98,7 +98,7 @@ function validateTags(tags: string[]) {
   tags.forEach(tag => {
     if (invalidTagCaracters.test(tag)) {
       console.log(`Invalid tag: ${tag}`);
-      throw new Error(`Invalid tag: ${tag}`);
+      throw new Error(`Invalid tag: "${tag}"`);
     }
   })
 }
