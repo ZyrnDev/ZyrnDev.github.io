@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { Box, Container, Flex, Heading,  Spacer, Tag, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading,  Spacer, Tag, Text, useColorModeValue } from '@chakra-ui/react';
 import { getPost, getPostPaths, Post } from '@/lib/posts';
 import { Link } from '@components/core';
 import Layout from '@components/layouts/centered';
@@ -44,12 +44,13 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
 };
 
 export const PostTags: FC<{ tags: string[], headingSize: string, tagSize: string }> = ({ tags, headingSize, tagSize }) => {
+  const tagColour = useColorModeValue("gray.300", "gray.700");
   return (
     <Flex wrap="wrap">
       <Heading as="h4" m="auto 0" mr="0.6rem" size={headingSize}>Tags: </Heading>
       {tags?.map(tag => (
         <Link href={`/blog/tags/${encodeURIComponent(tag)}`} key={tag} display="inline-flex" m="0.2rem 0" mr="0.6em">
-          <Tag size={tagSize} whiteSpace="nowrap">
+          <Tag size={tagSize} whiteSpace="nowrap" bgColor={tagColour}>
             {tag}
           </Tag>
         </Link>

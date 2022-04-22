@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { NextPage, GetStaticProps } from 'next';
-import { Box, Container, Heading, Flex, Spacer, Text, Tag, useColorModeValue } from '@chakra-ui/react';
+import { Box, Container, Heading, Flex, Spacer, Text, Tag as ChakraTag, useColorModeValue, Grid, GridItem } from '@chakra-ui/react';
 import Layout from '@components/layouts/centered';
 import { MetaOptions } from '@components/meta';
 import { Link } from '@components/core';
-import { getSortedPosts, Post } from '@/lib/posts';
+import { getSortedPosts, getTagsSortedByPostCount, Post, Tag } from '@/lib/posts';
 import { PostTitle } from '@/pages/blog/[filename]';
 
 const meta: MetaOptions = {
@@ -14,9 +14,12 @@ const meta: MetaOptions = {
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getSortedPosts();
+  const tags = await getTagsSortedByPostCount();
+
   return {
     props: {
       posts,
+      tags,
     }
   }
 }
@@ -44,17 +47,29 @@ export const PostDescription: FC<Post> = ({ children, ...post }) => {
   );
 };
 
-const Blog: NextPage<{ posts: Post[] }> = ({ posts }) => {
+const Blog: NextPage<{ posts: Post[], tags: Tag[] }> = ({ posts, tags }) => {
   return (
     <Layout meta={meta}>
-      <Container maxW="container.lg" p="0 0.5em">
+      <Container maxW="container.xl" p="0 0.5em">
         <Heading as="h1" size="4xl">Blog Posts</Heading>
         <br/>
-        <Link href="/blog/tags/">
-          <Heading as="h3" size="lg" mt="0">View Tags</Heading>
-        </Link>
-        <br/>
-        {posts.map(post => <PostDescription key={post.title} {...post} />)}
+        <Flex wrap="wrap" justify="center" align="start" direction="row">
+          <Container maxW="calc(100% - 20rem)">
+            {posts.map(post => <PostDescription key={post.title} {...post} />)}
+          </Container>
+          <Box w="20rem" m="0.5em 0" p="0.8em 0.5em" borderRadius="1em" bgColor={useColorModeValue("gray.100", "gray.800")} display={["none", "none", "none", "block"]}>
+            <Link href="/blog/tags/">
+              <Heading as="h3" size="lg" mt="0">All Tags</Heading>
+            </Link>
+            {tags.map(tag => (
+              <Link m="0.5rem 0.5rem" href={`/blog/tags/${encodeURIComponent(tag.name)}`} display={"inline-flex"} key={tag.name} mr="0.6em">
+                <ChakraTag size="lg">
+                  {tag.name + " | " + tag.posts.length}
+                </ChakraTag>
+              </Link>
+            ))}
+          </Box>
+        </Flex>
       </Container>
     </Layout>
   )
