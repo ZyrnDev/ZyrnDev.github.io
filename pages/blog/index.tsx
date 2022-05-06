@@ -25,19 +25,9 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export const PostDescription: FC<Post> = ({ children, ...post }) => {
-  const bgColour = useColorModeValue("gray.100", "gray.800");
-  // const bgColour = "green.500";
-  const background = { 
-    position: "absolute", top: 0, left: 0, height: "100%", width: "100%",
-    borderRadius: "1em",
-    backgroundColor: bgColour,
-    opacity: useColorModeValue(1, 0.5),
-    zIndex: -1,
-    content: `""`,
-  };
   return (
     <Link href={`/blog/${post.filename}`} isText={false} m="0 0.5rem" display="block" textDecoration="none">
-      <Box as="article" pos="relative" textAlign="start" p="0.5em 1em 1rem" margin="0.5em 0" _before={background} _hover={{ _before: { opacity: useColorModeValue(0.5, 1) } }}>
+      <Box as="article" pos="relative" textAlign="start" p="0.5em 1em 1rem" margin="0.5em 0" {...TargetHoverProps()}>
         <PostTitle {...post} isPreview />
         <Text>{post.preview ?? "Preview Unavailable"}</Text>
       </Box>
@@ -45,39 +35,46 @@ export const PostDescription: FC<Post> = ({ children, ...post }) => {
   );
 };
 
-const RightHandPanel: FC<{ tags: Tag[] }> = ({ tags }) => {
-  const [search, setSearch] = React.useState("");
-
-  const bgColour = useColorModeValue("gray.100", "gray.800");
-  // const bgColour = "green.500";
-  const background = { 
-    position: "absolute", top: 0, left: 0, height: "100%", width: "20rem",
-
+const TargetHoverProps = (width?: string | number) => ({
+  _before: { 
+    position: "absolute", top: 0, left: 0, height: "100%", width: width ?? "100%",
     borderRadius: "1em",
-    backgroundColor: bgColour,
+    backgroundColor: useColorModeValue("gray.100", "gray.800"),
     opacity: useColorModeValue(1, 0.5),
     zIndex: -1,
     content: `""`,
-  };
+  },
+  _hover: { _before: { opacity: useColorModeValue(0.5, 1) }}
+});
 
-  tags = tags.filter(tag => tag.name.toLowerCase().includes(search.toLowerCase()));
+const RightHandPanel: FC<{ tags: Tag[] }> = ({ tags }) => {
+  const [search, setSearch] = React.useState("");
 
   return (
-    <Box w="20rem" m="0.5em 0" p="0.5em" pos="relative" display={["none", "none", "none", "block"]}  _before={background} _hover={{/* _before: { opacity: useColorModeValue(0.5, 1) } */}}>
+    <Box w="20rem" m="0.5em 0" p="0.5em" pos="relative" display={["none", "none", "none", "block"]}  {...TargetHoverProps("20rem")} _hover={{}}>
       <Link href="/blog/tags/">
         <Heading as="h3" size="lg" mt="0">All Tags</Heading>
       </Link>
       <Input placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+      <DisplayTags tags={tags.filter(tag => tag.name.toLowerCase().includes(search.toLowerCase()))} />
+    </Box>
+  );
+};
+
+const DisplayTags: FC<{ tags: Tag[] }> = ({ tags }) => {
+  const bgColour = useColorModeValue("gray.300", "gray.700");
+  return (
+    <>
       {tags.map(tag => (
         <Link m="0.5rem 0.5rem" href={`/blog/tags/${encodeURIComponent(tag.name)}`} display={"inline-flex"} key={tag.name} mr="0.6em">
-          <ChakraTag size="lg" bgColor={useColorModeValue("gray.300", "gray.700")}>
+          <ChakraTag size="lg" bgColor={bgColour}>
             {tag.name + " | " + tag.posts.length}
           </ChakraTag>
         </Link>
       ))}
-    </Box>
+    </>
   );
-};
+}
 
 const Blog: NextPage<{ posts: Post[], tags: Tag[] }> = ({ posts, tags }) => {
   return (
