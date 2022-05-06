@@ -111,10 +111,7 @@ export async function getTags(): Promise<Tag[]> {
 
   const tagsMap = posts.filter(post => post.published || is_dev).reduce((tags, post) => {
     post.tags?.forEach(tag => {
-      let mapTag = tags.get(tag) ?? {
-        name: tag,
-        posts: []
-      };
+      let mapTag = tags.get(tag) ?? { name: tag, posts: [] };
 
       mapTag.posts.push(post);
 

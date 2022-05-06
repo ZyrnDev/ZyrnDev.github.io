@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { NextPage, GetStaticProps } from 'next';
-import { Box, Container, Heading, Flex, Spacer, Text, Tag as ChakraTag, useColorModeValue, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Container, Heading, Flex, Spacer, Text, Tag as ChakraTag, useColorModeValue, Grid, GridItem, Input } from '@chakra-ui/react';
 import Layout from '@components/layouts/centered';
 import { MetaOptions } from '@components/meta';
 import { Link } from '@components/core';
@@ -24,8 +24,6 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-
-
 export const PostDescription: FC<Post> = ({ children, ...post }) => {
   const bgColour = useColorModeValue("gray.100", "gray.800");
   // const bgColour = "green.500";
@@ -47,6 +45,40 @@ export const PostDescription: FC<Post> = ({ children, ...post }) => {
   );
 };
 
+const RightHandPanel: FC<{ tags: Tag[] }> = ({ tags }) => {
+  const [search, setSearch] = React.useState("");
+
+  const bgColour = useColorModeValue("gray.100", "gray.800");
+  // const bgColour = "green.500";
+  const background = { 
+    position: "absolute", top: 0, left: 0, height: "100%", width: "20rem",
+
+    borderRadius: "1em",
+    backgroundColor: bgColour,
+    opacity: useColorModeValue(1, 0.5),
+    zIndex: -1,
+    content: `""`,
+  };
+
+  tags = tags.filter(tag => tag.name.toLowerCase().includes(search.toLowerCase()));
+
+  return (
+    <Box w="20rem" m="0.5em 0" p="0.5em" pos="relative" display={["none", "none", "none", "block"]}  _before={background} _hover={{/* _before: { opacity: useColorModeValue(0.5, 1) } */}}>
+      <Link href="/blog/tags/">
+        <Heading as="h3" size="lg" mt="0">All Tags</Heading>
+      </Link>
+      <Input placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+      {tags.map(tag => (
+        <Link m="0.5rem 0.5rem" href={`/blog/tags/${encodeURIComponent(tag.name)}`} display={"inline-flex"} key={tag.name} mr="0.6em">
+          <ChakraTag size="lg" bgColor={useColorModeValue("gray.300", "gray.700")}>
+            {tag.name + " | " + tag.posts.length}
+          </ChakraTag>
+        </Link>
+      ))}
+    </Box>
+  );
+};
+
 const Blog: NextPage<{ posts: Post[], tags: Tag[] }> = ({ posts, tags }) => {
   return (
     <Layout meta={meta}>
@@ -57,18 +89,7 @@ const Blog: NextPage<{ posts: Post[], tags: Tag[] }> = ({ posts, tags }) => {
           <Container maxW="calc(100% - 20rem)">
             {posts.map(post => <PostDescription key={post.title} {...post} />)}
           </Container>
-          <Box w="20rem" m="0.5em 0" p="0.8em 0.5em" borderRadius="1em" bgColor={useColorModeValue("gray.100", "gray.800")} display={["none", "none", "none", "block"]}>
-            <Link href="/blog/tags/">
-              <Heading as="h3" size="lg" mt="0">All Tags</Heading>
-            </Link>
-            {tags.map(tag => (
-              <Link m="0.5rem 0.5rem" href={`/blog/tags/${encodeURIComponent(tag.name)}`} display={"inline-flex"} key={tag.name} mr="0.6em">
-                <ChakraTag size="lg">
-                  {tag.name + " | " + tag.posts.length}
-                </ChakraTag>
-              </Link>
-            ))}
-          </Box>
+          <RightHandPanel tags={tags} />
         </Flex>
       </Container>
     </Layout>
