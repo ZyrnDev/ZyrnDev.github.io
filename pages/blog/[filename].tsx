@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { Box, Container, Flex, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading,  Spacer, Tag, Text, useColorModeValue } from '@chakra-ui/react';
 import { getPost, getPostPaths, Post } from '@/lib/posts';
+import { Link } from '@components/core';
 import Layout from '@components/layouts/centered';
 import TagLine from '@/components/tagline';
 
@@ -22,11 +23,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title, date, author, published, isPreview = false }) => {
+export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title, date, author, published, tags, isPreview = false }) => {
   const titleSize = isPreview ? 'lg' : '2xl';
   const subTitleSize = isPreview ? 'sm' : 'md';
-  const bottomMargin = "0.8rem";
+  const tagSize = isPreview ? 'md' : 'lg';
+  const bottomMargin = isPreview ? "0.3rem" : "0.6rem"; //"0.8rem";
   const textDecoration = isPreview ? 'underline' : 'none';
+
   return (
     <>
       <TagLine as="h1" size={titleSize} m="0.1em 0" textDecoration={textDecoration}>{ published || (<Text as="span" color="red">(Not Published) </Text>) }{title}</TagLine>
@@ -35,8 +38,25 @@ export const PostTitle: FC<Post & { isPreview?: boolean }> = ({ filename, title,
         <Spacer />
         <Heading as="time" size={subTitleSize} m="0" mb={bottomMargin} colorScheme="gray" dateTime={(new Date(date)).toISOString()}>{date}</Heading>
       </Flex>
+      <PostTags tags={tags} headingSize={subTitleSize} tagSize={tagSize} />
     </>
   );
+};
+
+export const PostTags: FC<{ tags: string[], headingSize: string, tagSize: string }> = ({ tags, headingSize, tagSize }) => {
+  const tagColour = useColorModeValue("gray.300", "gray.700");
+  return (
+    <Flex wrap="wrap">
+      <Heading as="h4" m="auto 0" mr="0.6rem" size={headingSize}>Tags: </Heading>
+      {tags?.map(tag => (
+        <Link href={`/blog/tags/${encodeURIComponent(tag)}`} key={tag} display="inline-flex" m="0.2rem 0" mr="0.6em">
+          <Tag size={tagSize} whiteSpace="nowrap" bgColor={tagColour}>
+            {tag}
+          </Tag>
+        </Link>
+      ))}
+    </Flex>
+  )
 };
 
 const Render: FC<Post> = ({ children, ...post }) => {

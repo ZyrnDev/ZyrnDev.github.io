@@ -55,7 +55,9 @@ env:
   SITE_URL: ${{ inputs.site-url }}
   BASE_PATH: ${{ inputs.base-path }}
   ASSET_PREFIX: ${{ inputs.asset-prefix }}
-  VERSION: ${{ github.sha }}
+  COMMIT_HASH: ${{ github.sha }}
+  COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+  COMMIT_REF: ${{ github.head_ref || github.ref_name }}
   
 jobs:
   verify:
@@ -74,7 +76,7 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules-v2
+          cache-name: cache-node-modules
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm

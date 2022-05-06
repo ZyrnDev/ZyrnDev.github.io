@@ -3,6 +3,7 @@ title: 'Autumn Advances'
 date: '2021-04-24'
 author: 'Zyrn'
 published: true
+tags: ["web development", "test driven development", "CI-CD", "development operations"]
 ---
 
 In the past month I have been reasonably busy, so I didn't start a new project for once, and instead I just worked on my website a bit more. Most of my work revolved around refining what I already had and improving the development workflow further.

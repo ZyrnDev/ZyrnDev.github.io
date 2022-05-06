@@ -3,6 +3,7 @@ title: 'Typescript Transitions'
 date: '2021-05-25'
 author: 'Zyrn'
 published: true
+tags: ["web development", "typescript", "refactoring"]
 ---
 
 During this last month I have managed to push through a lot of updates to this website, most of which you can't even see. This is because I took on a a huge refactoring task to port the whole website to [TypeScript][1]. 

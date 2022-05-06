@@ -3,6 +3,7 @@ title: 'All the Little Projects'
 date: '2020-09-19'
 author: 'Zyrn'
 published: true
+tags: ["docker", "javascript", "nodejs"]
 ---
 
 Since my last update I haven't made all too much that I wanted to share, but I still wanted to share my month with you.

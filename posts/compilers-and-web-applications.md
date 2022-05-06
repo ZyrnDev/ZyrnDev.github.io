@@ -3,6 +3,7 @@ title: 'Compilers & Web-Applications'
 date: '2020-07-18'
 author: 'Zyrn'
 published: true
+tags: ["web", "javascript", "react", "nodejs", "rust", "docker", "language development"]
 ---
 
 Over the last month I have been working on a lot more offline projects specifically, I have been working on lexical analysis engines for a different use cases. Some examples of these are my own basic programming language, a low level assemble compiler for a virtual CPU and a query language for a distributed processing engine.

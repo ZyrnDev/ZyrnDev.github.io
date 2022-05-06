@@ -3,6 +3,7 @@ title: 'Refactor Hell'
 date: '2021-03-16'
 author: 'Zyrn'
 published: true
+tags: ["refactoring", "data modelling", "javascript", "flutter", "mobile applications"]
 ---
 
 Once again, this month I revisited an old project and improved it. This project was the notifications app I developed in November last year, which I discussed at the time in [this article][1].
