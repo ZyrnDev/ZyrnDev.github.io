@@ -3,6 +3,7 @@ title: "Migration - We're Live!"
 date: '2020-06-20'
 author: 'Zyrn'
 published: true
+tags: ["cloud", "nginx", "development operations", "react"]
 ---
 
 It has been over a month since my last post and there is a lot of changes to share. Recently I finally made the jump to using this Next.js website as my main production website. This was a big leap as I was also deploying to a new cloud server with <a href="https://www.ovh.com/">OVH</a> as I talked about in my last post.

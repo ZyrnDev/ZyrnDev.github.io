@@ -3,6 +3,7 @@ title: 'Say What?'
 date: '2021-01-25'
 author: 'Zyrn'
 published: true
+tags: ["language development", "rust", "llvm"]
 ---
 
 For me, this month has had a big focus on languages, compilers, and eco-systems. 

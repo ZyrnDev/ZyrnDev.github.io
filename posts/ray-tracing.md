@@ -3,6 +3,7 @@ title: 'Simple Ray Tracing'
 date: '2020-08-14'
 author: 'Zyrn'
 published: true
+tags: ["python", "computer graphics", "algorithms"]
 ---
 
 <style>

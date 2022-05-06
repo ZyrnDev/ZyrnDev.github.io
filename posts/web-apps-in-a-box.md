@@ -3,6 +3,7 @@ title: 'Web Applications in a Box'
 date: '2020-10-26'
 author: 'Zyrn'
 published: true
+tags: ["web", "javascript", "react", "nodejs", "rust", "docker", "graphql"]
 ---
 
 It has been a bit over a month since my last post and I have managed to get some good progress on some new projects.

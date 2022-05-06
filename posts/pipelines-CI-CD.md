@@ -3,6 +3,7 @@ title: 'Pipelines: CI/CD'
 date: '2021-02-17'
 author: 'Zyrn'
 published: true
+tags: ["CI-CD", "development operations", "Github Actions", "Raspberry Pi"]
 ---
 
 Once again, this month entailed many new and interesting challenges, tools, and techniques for me to learn to work with. The biggest of these this month was to learn how to automate some of my development and deployment workflows using [Github Actions][1]. Along side these CI / CD additions I also moved the repository for this project to my main Github account.

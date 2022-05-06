@@ -3,6 +3,7 @@ title: 'A Fluttering Experience'
 date: '2020-11-18'
 author: 'Zyrn'
 published: true
+tags: ["mobile applications", "flutter", "dart", "javascript", "nodejs"]
 ---
 
 <style>
